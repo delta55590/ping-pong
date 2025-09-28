@@ -49,6 +49,11 @@ finish = False
 speed_x = 2
 speed_y = 2
 
+font.init()
+font1 = font.Font(None, 35)
+lose1 = font1.render("Player 1 lose", True, (180, 0, 0))
+lose2 = font1.render("Player 2 lose", True, (180, 0, 0))
+
 while game:
     for e in event.get():
         if e.type == QUIT:
@@ -66,6 +71,15 @@ while game:
         if sprite.collide_rect(raket1, ball) or sprite.collide_rect(raket2, ball):
             speed_x *= -1
 
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 300))
+
+        if ball.rect.x > win_width:
+            finish = True
+            window.blit(lose2, (200, 300))
+
+
         ball.draw()
         raket1.draw()
         raket2.draw()
@@ -74,5 +88,8 @@ while game:
     clock.tick(60)
 
    
+    
 
-   
+
+
+       
